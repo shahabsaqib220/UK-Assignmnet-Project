@@ -44,7 +44,7 @@ app.use(express.json());
   app.use(cors());
 
   // Define a route for POST requests to the root URL
-  app.post('https://uk-assignmnet-project.vercel.app/', (req, res) => {
+  app.post('/', (req, res) => {
     res.send('POST request received');
   });
 
