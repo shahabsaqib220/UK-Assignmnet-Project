@@ -35,13 +35,24 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+const corsOptions = {
+  origin: 'https://assignmentask3completedapi-ufh9tqwwe.vercel.app/',
+  methods: ['GET', 'POST'],
+  credentials: true,
+};
+
+
+
+
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors(corsOptions));
 
 
-app.get("/", (req,res) =>{
-    res.json("Hello")
-}
+// Define a route for POST requests to the root URL
+app.post('/', (req, res) => {
+  res.send('POST request received');
+});
+
 
 app.use("/api/payment", stripePaymentRouter )
 app.use("/api/orders",orderCreationRouter )
