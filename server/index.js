@@ -36,7 +36,7 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: 'https://assignmentask3completedapi-65cl7qpk8.vercel.app',
+  origin: 'https://ukassignmentdesk-shahab-saqibs-projects-f0dc575c.vercel.app',
   methods: ['GET', 'POST'],
   credentials: true,
 };
