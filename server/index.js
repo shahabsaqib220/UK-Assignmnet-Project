@@ -36,11 +36,20 @@ const app = express();
 app.use(express.json());
 
 // Enable CORS for all routes
-app.use(cors());
+// CORS Configuration
+const corsOptions = {
+    origin: 'https://uk-assignmnet-project.vercel.app',
+    methods: ['GET', 'POST'],
+    credentials: true,
+  };
+  
 
-// Define a route for GET requests to the root URL
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+
+  app.use(cors(corsOptions));
+
+  // Define a route for POST requests to the root URL
+  app.post('/', (req, res) => {
+    res.send('POST request received');
   });
 
 app.use("/api/payment", stripePaymentRouter )
