@@ -52,6 +52,15 @@ const corsOptions = {
     res.send('POST request received');
   });
 
+  app.get('/', (req, res) => {
+    res.send('Hello World!');
+  });
+  
+  app.post('/', (req, res) => {
+    res.send('POST request received');
+  });
+  
+
 app.use("/api/payment", stripePaymentRouter )
 app.use("/api/orders",orderCreationRouter )
 app.use("/api/adminorder", AllPendingOrderRouter )
