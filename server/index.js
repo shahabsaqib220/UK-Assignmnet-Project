@@ -35,41 +35,8 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-const corsOptions = {
-  origin: 'ukassignmentdesk-7258er8un-shahab-saqibs-projects-f0dc575c.vercel.app/1122',      
-  
-  methods: ['GET', 'POST'],
-  credentials: true,
-};
-
-
-
-
 // Enable CORS for all routes
-<<<<<<< HEAD
-const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
-    methods: ['GET', 'POST'],
-    credentials: true,
-  };
-  
-  app.use(cors(corsOptions));
-
-  // Define a route for POST requests to the root URL
-app.post('/', (req, res) => {
-    res.send('POST request received');
-  });
-  
-=======
-app.use(cors(corsOptions));
-
-
-// Define a route for POST requests to the root URL
-app.post('/', (req, res) => {
-  res.send('POST request received');
-});
-
->>>>>>> e5f00b67c8505211df7037d821a9ff11d3263a8a
+app.use(cors());
 
 app.use("/api/payment", stripePaymentRouter )
 app.use("/api/orders",orderCreationRouter )
