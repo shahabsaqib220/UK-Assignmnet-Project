@@ -36,7 +36,7 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: 'https://assignmentask3completedapi-ufh9tqwwe.vercel.app/',
+  origin: 'https://assignmentask3completedapi-mmel6jx28.vercel.app/',
   methods: ['GET', 'POST'],
   credentials: true,
 };
