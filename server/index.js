@@ -38,6 +38,11 @@ app.use(express.json());
 // Enable CORS for all routes
 app.use(cors());
 
+
+app.get("/", (req,res) =>{
+    res.json("Hello")
+}
+
 app.use("/api/payment", stripePaymentRouter )
 app.use("/api/orders",orderCreationRouter )
 app.use("/api/adminorder", AllPendingOrderRouter )
