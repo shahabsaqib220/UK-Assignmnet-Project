@@ -14,7 +14,7 @@ const OrderPage = () => {
 
   const handlePaymentSubmit = async (paymentMethodId, amount, currency) => {
     try {
-      const response = await fetch("http://localhost:5000/api/payments", {
+      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/payments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

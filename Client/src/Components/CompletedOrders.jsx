@@ -14,7 +14,7 @@ const CompletedOrders = () => {
   useEffect(() => {
     const fetchCompletedOrders = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/adminorder/complete`, {
+        const response = await fetch(`https://uk-assignmnet-project.vercel.app/api/adminorder/complete`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const CompletedOrders = () => {
   }, []);
 
   const handleDownload = (orderId) => {
-    window.open(`http://localhost:5000/api/uploads/download/${orderId}`);
+    window.open(`https://uk-assignmnet-project.vercel.app/api/uploads/download/${orderId}`);
   };
 
   const handleSearch = (e) => {
@@ -58,7 +58,7 @@ const CompletedOrders = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/api/completedorders/delete/${orderId}`, {
+        fetch(`https://uk-assignmnet-project.vercel.app/api/completedorders/delete/${orderId}`, {
           method: "DELETE",
         })
           .then((response) => response.json())
@@ -89,7 +89,7 @@ const CompletedOrders = () => {
       confirmButtonText: "Yes, delete all completed orders!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch("http://localhost:5000/api/completedorders/delete-completed", {
+        fetch("https://uk-assignmnet-project.vercel.app/api/completedorders/delete-completed", {
           method: "DELETE",
         })
           .then((response) => response.json())

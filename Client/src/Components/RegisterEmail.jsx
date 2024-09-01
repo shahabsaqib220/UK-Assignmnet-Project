@@ -33,7 +33,7 @@ const EmailRegisterForm = () => {
 
   const fetchRegisteredEmails = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/emails/get-all-emails");
+      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/emails/get-all-emails");
       const data = await response.json();
       setRegisteredEmails(data);
       setFilteredEmails(data);
@@ -47,7 +47,7 @@ const EmailRegisterForm = () => {
     e.preventDefault();
     setIsRegistering(true);
     try {
-      const response = await fetch("http://localhost:5000/api/emails/registeremail", {
+      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/emails/registeremail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const EmailRegisterForm = () => {
     if (result.isConfirmed) {
       setIsRemoving(id); // Track the ID of the email being removed
       try {
-        const response = await fetch(`http://localhost:5000/api/emails/delete-email/${id}`, {
+        const response = await fetch(`https://uk-assignmnet-project.vercel.app/api/emails/delete-email/${id}`, {
           method: "DELETE",
         });
 
@@ -123,7 +123,7 @@ const EmailRegisterForm = () => {
     if (result.isConfirmed) {
       setIsRemovingAll(true);
       try {
-        const response = await fetch("http://localhost:5000/api/emails/delete-all-emails", {
+        const response = await fetch("https://uk-assignmnet-project.vercel.app/api/emails/delete-all-emails", {
           method: "DELETE",
         });
 

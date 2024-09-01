@@ -39,7 +39,7 @@ const AdminLogin = () => {
     setError(""); // Clear previous errors
     setIsLoading(true); // Start loading
     try {
-      const response = await fetch("http://localhost:5000/api/admin/login", {
+      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

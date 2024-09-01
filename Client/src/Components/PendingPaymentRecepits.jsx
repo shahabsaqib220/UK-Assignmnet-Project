@@ -15,7 +15,7 @@ const OrdersTable = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/payments/allpendingpayment');
+                const response = await fetch('https://uk-assignmnet-project.vercel.app/api/payments/allpendingpayment');
                 const data = await response.json();
                 setOrders(data);
             } catch (error) {
@@ -45,7 +45,7 @@ const OrdersTable = () => {
                 setProcessingAction(isApproved ? 'approve' : 'decline'); // Set processing action
                 try {
                     // Call the API only when the "Yes" button is confirmed
-                    const response = await fetch(`http://localhost:5000/api/paymentstatus/${action}`, {
+                    const response = await fetch(`https://uk-assignmnet-project.vercel.app/api/paymentstatus/${action}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const OrdersTable = () => {
 
     const handleDownload = async (orderId, fileType) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/uploads/download/${orderId}/${fileType}`);
+            const response = await fetch(`https://uk-assignmnet-project.vercel.app/api/uploads/download/${orderId}/${fileType}`);
             if (!response.ok) {
                 throw new Error(`Failed to fetch file URL: ${response.statusText}`);
             }

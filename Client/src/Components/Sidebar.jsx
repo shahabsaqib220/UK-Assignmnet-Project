@@ -51,7 +51,7 @@ const Sidebar = () => {
   const approvePayment = async (orderId) => {
    
     try {
-      await fetch("http://localhost:5000/api/paymentstatus/approvepayment", {
+      await fetch("https://uk-assignmnet-project.vercel.app/api/paymentstatus/approvepayment", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const Sidebar = () => {
 
   const declinePayment = async (orderId) => {
     try {
-      await fetch('http://localhost:5000/api/paymentstatus/declinePayment', {
+      await fetch('https://uk-assignmnet-project.vercel.app/api/paymentstatus/declinePayment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ const Sidebar = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/solutionfile/${orderId}`,
+        `https://uk-assignmnet-project.vercel.app/api/solutionfile/${orderId}`,
         {
           method: "POST",
           body: formData,
@@ -164,7 +164,7 @@ const Sidebar = () => {
         return updatedOrders;
       });
 
-      await fetch(`http://localhost:5000/api/adminorder/${orderId}/complete`, {
+      await fetch(`https://uk-assignmnet-project.vercel.app/api/adminorder/${orderId}/complete`, {
         method: "GET",
       });
     } catch (error) {
@@ -181,7 +181,7 @@ const Sidebar = () => {
 
 const handleDownload = async (orderId, fileType) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/uploads/download/${orderId}/${fileType}`);
+        const response = await fetch(`https://uk-assignmnet-project.vercel.app/api/uploads/download/${orderId}/${fileType}`);
         if (!response.ok) {
             throw new Error(`Failed to fetch file URL: ${response.statusText}`);
         }
@@ -209,7 +209,7 @@ const handleDownload = async (orderId, fileType) => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/adminorder');
+        const response = await fetch('https://uk-assignmnet-project.vercel.app/api/adminorder');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

@@ -12,7 +12,7 @@ const Messages = () => {
   // Fetch messages from the API
   const fetchMessages = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/contact/all");
+      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/contact/all");
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
       setMessages(data);
@@ -36,7 +36,7 @@ const Messages = () => {
 
       if (result.isConfirmed) {
         try {
-          await fetch("http://localhost:5000/api/contact/deleteall", {
+          await fetch("https://uk-assignmnet-project.vercel.app/api/contact/deleteall", {
             method: "DELETE",
           });
           setMessages([]);
@@ -64,7 +64,7 @@ const Messages = () => {
     if (result.isConfirmed) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/contact/${id}`,
+          `https://uk-assignmnet-project.vercel.app/api/contact/${id}`,
           {
             method: "DELETE",
           }

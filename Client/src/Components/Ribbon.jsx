@@ -11,7 +11,7 @@ const handleOrderNowClick = (e) => {
     behavior: "smooth", // Smooth scroll to the top
   });
   // If you need to redirect to the homepage, you can use:
-  window.location.href = "http://localhost:3000/";
+  window.location.href = "https://uk-assignmnet-project.vercel.app/";
 };
 const handleWhatappClick = () => {
   // Construct the WhatsApp URL with the phone number

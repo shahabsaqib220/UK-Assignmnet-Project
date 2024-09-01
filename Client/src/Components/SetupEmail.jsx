@@ -20,7 +20,7 @@ const EmailSetupForm = () => {
   const fetchEmailSetup = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/setupemail/getemailsetup/mail-setup"
+        "https://uk-assignmnet-project.vercel.app/api/setupemail/getemailsetup/mail-setup"
       );
       if (!response.ok) throw new Error("Network response was not ok");
 
@@ -56,7 +56,7 @@ const EmailSetupForm = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/setupemail/update-email-setup",
+        "https://uk-assignmnet-project.vercel.app/api/setupemail/update-email-setup",
         {
           method: "POST",
           body: formData,

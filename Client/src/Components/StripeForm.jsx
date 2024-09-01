@@ -111,7 +111,7 @@ const StripeForm = () => {
         paymentReceiptUrl, // Include the payment receipt URL in the payload
       };
   
-      const orderResponse = await fetch("http://localhost:5000/api/orders/create", {
+      const orderResponse = await fetch("https://uk-assignmnet-project.vercel.app/api/orders/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

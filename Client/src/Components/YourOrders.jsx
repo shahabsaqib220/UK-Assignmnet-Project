@@ -58,7 +58,7 @@ const YourOrders = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:5000/api/orders/search", {
+      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/orders/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

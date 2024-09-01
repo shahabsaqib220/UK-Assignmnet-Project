@@ -75,7 +75,7 @@ const ContactUs = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact/submit", {
+      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/contact/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

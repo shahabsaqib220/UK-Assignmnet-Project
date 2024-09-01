@@ -32,7 +32,7 @@ const ForgetPassword = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/forgot-password",
+        "https://uk-assignmnet-project.vercel.app/api/admin/forgot-password",
         {
           method: "POST",
           headers: {
@@ -97,7 +97,7 @@ const ForgetPassword = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/reset-password",
+        "https://uk-assignmnet-project.vercel.app/api/admin/reset-password",
         {
           method: "POST",
           headers: {
