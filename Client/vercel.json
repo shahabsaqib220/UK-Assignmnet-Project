@@ -1,10 +1,15 @@
 {
     "version": 2,
-    "routes": [
+    "builds": [
       {
-        "src": "/api/(.*)",
-        "dest": "https://uk-assignmnet-project.vercel.app/api/$1"
-      },
+        "src": "app.js",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "build"
+        }
+      }
+    ],
+    "routes": [
       {
         "src": "/(.*)",
         "dest": "/index.html"
