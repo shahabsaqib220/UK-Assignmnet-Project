@@ -353,30 +353,24 @@ const filteredOrders = pendingOrders.filter(
                     </span>
                   ) : (
                     <div className="flex flex-col space-y-4 p-4 bg-white shadow-lg rounded-lg">
-                      <input
-                        type="file"
-                        accept=".pdf"
-                        onChange={(event) =>
-                          handleFileChange(
-                            event,
-                            order.orderId,
-                            "solutionFile1"
-                          )
-                        }
-                        className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors"
-                      />
-                      <input
-                        type="file"
-                        accept=".pdf"
-                        onChange={(event) =>
-                          handleFileChange(
-                            event,
-                            order.orderId,
-                            "solutionFile2"
-                          )
-                        }
-                        className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors"
-                      />
+                     <input
+  type="file"
+  accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .ppt, .pptx"
+  onChange={(event) =>
+    handleFileChange(event, order.orderId, "solutionFile1")
+  }
+  className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors"
+/>
+
+<input
+  type="file"
+  accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .ppt, .pptx"
+  onChange={(event) =>
+    handleFileChange(event, order.orderId, "solutionFile2")
+  }
+  className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors"
+/>
+
                       <div className="flex space-x-4">
                         <button
                           onClick={() => handleUpload(order.orderId)}
