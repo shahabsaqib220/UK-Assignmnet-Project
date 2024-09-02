@@ -1,0 +1,20 @@
+.ImageCarousel {
+  width: 100%;
+  height: 100vh; /* or any other height you prefer */
+  overflow: hidden;
+}
+
+.ImageCarousel.slick-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ImageCarousel.slick-slide div {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
