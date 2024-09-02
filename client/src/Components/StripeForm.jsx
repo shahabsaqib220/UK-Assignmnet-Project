@@ -17,9 +17,9 @@ import { useTable } from 'react-table';
 
 const bankDetails = [
   { field: 'Bank Name', detail: 'Barclays Bank' },
-  { field: 'Account Name', detail: 'Mr Z Ali' },
-  { field: 'Sort Code', detail: '20-78-58' },
-  { field: 'Account Number', detail: '33887294' },
+  { field: 'Account Name', detail: 'Tahir & J Consultants LTD' },
+  { field: 'Sort Code', detail: '04-06-05' },
+  { field: 'Account Number', detail: ' 24387572' },
 ];
 
 const columns = [
