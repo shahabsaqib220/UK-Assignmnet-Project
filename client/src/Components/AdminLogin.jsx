@@ -109,123 +109,125 @@ const AdminLogin = () => {
   </div>
 
   <div className="flex flex-grow justify-center items-center p-10 lg:pr-20 lg:pl-10">
-    <form
-      className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full space-y-6"
-      onSubmit={handleSubmit}
-    >
-      {/* Logo Section */}
-      <div className="flex justify-center">
-  <img
-    src={loginLogo} // Use the logo file here
-    alt="Logo"
-    className="w-48 h-48 object-contain mb-6"
-  />
-</div>
+  <form
+    className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full space-y-6"
+    onSubmit={handleSubmit}
+  >
+    {/* Logo Section */}
+    <div className="flex justify-center">
+      <img
+        src={loginLogo}
+        alt="Logo"
+        className="w-48 h-48 object-contain mb-6"
+      />
+    </div>
 
+    {/* Email Input */}
+    <div>
+      <label
+        htmlFor="email"
+        className="block text-sm font-medium leading-6 text-gray-900"
+      >
+        Email address
+      </label>
+      <div className="mt-2">
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          id="email"
+          autoComplete="email"
+          className="block w-full rounded-md border-gray-300 py-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        />
+      </div>
+    </div>
 
-      {/* Email Input */}
-      <div>
+    {/* Password Input */}
+    <div>
+      <div className="flex items-center justify-between">
         <label
-          htmlFor="email"
+          htmlFor="password"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
-          Email address
+          Password
         </label>
-        <div className="mt-2">
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            id="email"
-            autoComplete="email"
-            className="block w-full rounded-md border-gray-300 py-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-        </div>
-      </div>
-
-      {/* Password Input */}
-      <div>
-        <div className="flex items-center justify-between">
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium leading-6 text-gray-900"
+        <div className="text-sm">
+          <Link
+            to="/forgetpassword"
+            className="font-semibold text-indigo-600 hover:text-indigo-500"
           >
-            Password
-          </label>
-          <div className="text-sm">
-            <Link
-              to="/forgetpassword"
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
-            >
-              Forgot password?
-            </Link>
-          </div>
-        </div>
-        <div className="mt-2">
-          <input
-            id="password"
-            autoComplete="current-password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="block w-full rounded-md border-gray-300 py-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
+            Forgot password?
+          </Link>
         </div>
       </div>
-
-      {/* Submit Button */}
-      <div>
-        <button
-          type="submit"
-          className={`flex w-full justify-center rounded-md px-4 py-2 text-sm font-semibold leading-6 text-white shadow-md ${
-            isLoading
-              ? "bg-gray-500 cursor-not-allowed"
-              : "bg-indigo-600 hover:bg-indigo-500"
-          } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <svg
-              className="animate-spin h-5 w-5 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v8H4z"
-              />
-            </svg>
-          ) : (
-            "Login"
-          )}
-        </button>
+      <div className="mt-2">
+        <input
+          id="password"
+          autoComplete="current-password"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          className="block w-full rounded-md border-gray-300 py-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        />
       </div>
+    </div>
 
-      {/* Error Message */}
+    {/* Error Message Placeholder */}
+    <div className="min-h-[48px]">
       {error && (
         <div
-          className="flex justify-center items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          className="flex justify-center items-center p-4 mb-4 text-sm text-red-700 bg-red-100 border border-red-400 rounded-lg dark:bg-gray-800 dark:text-red-300"
           role="alert"
         >
-          <span className="font-extrabold">Error!</span> {error}
+          <span className="font-semibold mr-2">Attention:</span> {error}
         </div>
       )}
-    </form>
-  </div>
+    </div>
+
+    {/* Submit Button */}
+    <div>
+      <button
+        type="submit"
+        className={`flex w-full justify-center rounded-md px-4 py-2 text-sm font-semibold leading-6 text-white shadow-md ${
+          isLoading
+            ? "bg-gray-500 cursor-not-allowed"
+            : "bg-indigo-600 hover:bg-indigo-500"
+        } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <svg
+            className="animate-spin h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z"
+            />
+          </svg>
+        ) : (
+          "Login"
+        )}
+      </button>
+    </div>
+  </form>
+</div>
+
 </div>
 
       <Footer />

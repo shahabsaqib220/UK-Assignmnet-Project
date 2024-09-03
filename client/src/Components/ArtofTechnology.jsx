@@ -90,43 +90,44 @@ const AboutCard = ({ title, description, imgSrc }) => (
 const AboutSlider = () => {
   return (
     <>
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-6 text-black md:px-12 xl:px-0">
-          <AnimatedH1 />
-          <Slider {...sliderSettings}>
-            <AboutCard
-              title="Cutting-Edge Writing Tools"
-              description="Utilize advanced writing tools like Grammarly and Hemingway Editor to ensure grammatical accuracy, clarity, and style."
-              imgSrc={CuttingEdgeWritingTools}
-            />
-            <AboutCard
-              title="Original and Plagiarism-Free Content"
-              description="Discover our mission to provide exceptional value and service to our clients, making a positive impact in our industry."
-              imgSrc={OriginalandPlagiarismFreeContent}
-            />
-            <AboutCard
-              title="Expert Research and Sources"
-              description="Leverage access to academic databases and libraries to provide well-researched, evidence-backed content, enhancing the credibility and depth of every piece of written work."
-              imgSrc={ExpertResearchandSources}
-            />
-            <AboutCard
-              title="Efficient Management"
-              description="Employ project management tools and strict deadlines to ensure timely delivery of assignments, meeting student needs promptly and maintaining high standards of service."
-              imgSrc={EfficientManagement}
-            />
-            <AboutCard
-              title="Personalized Revision"
-              description="Offer detailed, personalized feedback and multiple revisions based on student input, ensuring that each piece of work meets their specific requirements and expectations."
-              imgSrc={PersonalizedRevision}
-            />
-            <AboutCard
-              title="Professional Formatting and Presentation"
-              description="Utilize modern formatting tools and templates to ensure that all written work adheres to academic standards and presents information clearly and professionally."
-              imgSrc={ProfessionalFormattingandPresentation}
-            />
-          </Slider>
-        </div>
-      </div>
+     <div className="py-16 bg-white">
+  <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-black">
+    <AnimatedH1 />
+    <Slider {...sliderSettings}>
+      <AboutCard
+        title="Cutting-Edge Writing Tools"
+        description="Utilize advanced writing tools like Grammarly and Hemingway Editor to ensure grammatical accuracy, clarity, and style."
+        imgSrc={CuttingEdgeWritingTools}
+      />
+      <AboutCard
+        title="Original and Plagiarism-Free Content"
+        description="Discover our mission to provide exceptional value and service to our clients, making a positive impact in our industry."
+        imgSrc={OriginalandPlagiarismFreeContent}
+      />
+      <AboutCard
+        title="Expert Research and Sources"
+        description="Leverage access to academic databases and libraries to provide well-researched, evidence-backed content, enhancing the credibility and depth of every piece of written work."
+        imgSrc={ExpertResearchandSources}
+      />
+      <AboutCard
+        title="Efficient Management"
+        description="Employ project management tools and strict deadlines to ensure timely delivery of assignments, meeting student needs promptly and maintaining high standards of service."
+        imgSrc={EfficientManagement}
+      />
+      <AboutCard
+        title="Personalized Revision"
+        description="Offer detailed, personalized feedback and multiple revisions based on student input, ensuring that each piece of work meets their specific requirements and expectations."
+        imgSrc={PersonalizedRevision}
+      />
+      <AboutCard
+        title="Professional Formatting and Presentation"
+        description="Utilize modern formatting tools and templates to ensure that all written work adheres to academic standards and presents information clearly and professionally."
+        imgSrc={ProfessionalFormattingandPresentation}
+      />
+    </Slider>
+  </div>
+</div>
+
     </>
   );
 };

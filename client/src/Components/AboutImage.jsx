@@ -2,7 +2,6 @@
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-
 import "slick-carousel/slick/slick-theme.css";
 
 import mission from "../assets/images/mission.jpg";
@@ -89,45 +88,43 @@ const AboutCard = ({ title, description, imgSrc }) => (
 
 const AboutSlider = () => {
   return (
-    <>
-      <div className="py-16 bg-[#3b3b3b]">
-        <div className="container mx-auto px-6 text-[#3b3b3b] md:px-12 xl:px-0">
-          <AnimatedH1 />
-          <Slider {...sliderSettings}>
-            <AboutCard
-              title="Our Team"
-              description="Meet the talented and dedicated team members who drive our company forward with their expertise and passion."
-              imgSrc={team}
-            />
-            <AboutCard
-              title="Our Mission"
-              description="Discover our mission to provide exceptional value and service to our clients, making a positive impact in our industry."
-              imgSrc={mission}
-            />
-            <AboutCard
-              title="Our Values"
-              description="Learn about the core values that guide our work ethic, ensuring integrity, collaboration, and excellence in everything we do."
-              imgSrc={value}
-            />
-            <AboutCard
-              title="Our History"
-              description="Explore our journey from inception to where we are today, highlighting key milestones and achievements along the way."
-              imgSrc={history}
-            />
-            <AboutCard
-              title="Our Vision"
-              description="Understand our vision for the future and the strategic goals we aim to achieve to continually advance and innovate."
-              imgSrc={vision}
-            />
-            <AboutCard
-              title="Achievements"
-              description="Celebrate our significant accomplishments and awards that recognize our success and commitment to excellence."
-              imgSrc={celebration}
-            />
-          </Slider>
-        </div>
+    <div className="py-16 bg-[#3b3b3b]">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-[#3b3b3b]">
+        <AnimatedH1 />
+        <Slider {...sliderSettings}>
+          <AboutCard
+            title="Our Team"
+            description="Meet the talented and dedicated team members who drive our company forward with their expertise and passion."
+            imgSrc={team}
+          />
+          <AboutCard
+            title="Our Mission"
+            description="Discover our mission to provide exceptional value and service to our clients, making a positive impact in our industry."
+            imgSrc={mission}
+          />
+          <AboutCard
+            title="Our Values"
+            description="Learn about the core values that guide our work ethic, ensuring integrity, collaboration, and excellence in everything we do."
+            imgSrc={value}
+          />
+          <AboutCard
+            title="Our History"
+            description="Explore our journey from inception to where we are today, highlighting key milestones and achievements along the way."
+            imgSrc={history}
+          />
+          <AboutCard
+            title="Our Vision"
+            description="Understand our vision for the future and the strategic goals we aim to achieve to continually advance and innovate."
+            imgSrc={vision}
+          />
+          <AboutCard
+            title="Achievements"
+            description="Celebrate our significant accomplishments and awards that recognize our success and commitment to excellence."
+            imgSrc={celebration}
+          />
+        </Slider>
       </div>
-    </>
+    </div>
   );
 };
 

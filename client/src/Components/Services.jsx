@@ -87,50 +87,43 @@ const ServiceCard = ({ title, description, imgSrc }) => (
 const ServicesSlider = () => {
   return (
     <div className="py-16 bg-[#3b3b3b]">
-      <div className="container mx-auto px-6 text-gray-500 md:px-12 xl:px-0">
-        <AnimatedH1 />
-        <Slider {...sliderSettings}>
-          <ServiceCard
-            title="Eassy Writing"
-            description="Our Easy Writing service simplifies the writing process, making it stress-free and efficient. Whether it's an essay, report, or any other document."
-            imgSrc={service1}
-          />
-          <ServiceCard
-            title="Dissertation Writing"
-            description="Our Dissertation Writing service offers expert assistance in crafting a compelling and well-researched dissertation. We guide you through every stage."
-            imgSrc={service2}
-          />
-          <ServiceCard
-            title="Assignment Editing"
-            description="Our Assignment Editing service meticulously reviews and refines your work, focusing on clarity, coherence, and accuracy. We enhance your writing's structure and style."
-            imgSrc={service3}
-          />
-          <ServiceCard
-            title="University Assignment Help"
-            description="Our University Assignment Help provides expert support to tackle challenging coursework and ensure your assignments are well-researched and clearly presented. 
-
-
-
-
-
-
-"
-            imgSrc={service6}
-          />
-          <ServiceCard
-            title="College Assignment"
-            description="Our College Assignment service offers tailored support to help you tackle your coursework with ease. Our experts editing to ensure your assignments are well-organized."
-            imgSrc={service4}
-          />
-          <ServiceCard
-            title="Research Report Writing"
-            description="
-Our Research Report Writing service delivers comprehensive and meticulously crafted reports that reflect thorough research and insightful analysis."
-            imgSrc={service5}
-          />
-        </Slider>
-      </div>
+    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-gray-500">
+      <AnimatedH1 />
+      <Slider {...sliderSettings}>
+        <ServiceCard
+          title="Essay Writing"
+          description="Our Essay Writing service simplifies the writing process, making it stress-free and efficient. Whether it's an essay, report, or any other document."
+          imgSrc={service1}
+        />
+        <ServiceCard
+          title="Dissertation Writing"
+          description="Our Dissertation Writing service offers expert assistance in crafting a compelling and well-researched dissertation. We guide you through every stage."
+          imgSrc={service2}
+        />
+        <ServiceCard
+          title="Assignment Editing"
+          description="Our Assignment Editing service meticulously reviews and refines your work, focusing on clarity, coherence, and accuracy. We enhance your writing's structure and style."
+          imgSrc={service3}
+        />
+        <ServiceCard
+          title="University Assignment Help"
+          description="Our University Assignment Help provides expert support to tackle challenging coursework and ensure your assignments are well-researched and clearly presented."
+          imgSrc={service6}
+        />
+        <ServiceCard
+          title="College Assignment"
+          description="Our College Assignment service offers tailored support to help you tackle your coursework with ease. Our experts edit to ensure your assignments are well-organized."
+          imgSrc={service4}
+        />
+        <ServiceCard
+          title="Research Report Writing"
+          description="Our Research Report Writing service delivers comprehensive and meticulously crafted reports that reflect thorough research and insightful analysis."
+          imgSrc={service5}
+        />
+      </Slider>
     </div>
+  </div>
+  
   );
 };
 

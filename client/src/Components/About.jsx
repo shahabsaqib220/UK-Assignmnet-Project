@@ -147,60 +147,7 @@ const About = () => {
       <AboutHero />
       <ArtofTechnology />
 
-      {/* <div className="bg-white">
-        <ScrollReveal>
-          <section className="text-center py-12 px-4">
-            <h2 className="text-2xl font-bold">
-              Committed To Your Work And Happiness
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8">
-              <div className="p-4 shadow-lg rounded-lg bg-gray-300 hover:bg-gray-900 hover:text-white transition-colors">
-                <h3 className="text-xl font-bold">Quality</h3>
-              </div>
-              <div className="p-4 shadow-lg rounded-lg  bg-gray-300 hover:bg-gray-900 hover:text-white transition-colors">
-                <h3 className="text-xl font-bold">Timeliness</h3>
-              </div>
-              <div className="p-4 shadow-lg rounded-lg bg-gray-300 hover:bg-gray-900 hover:text-white transition-colors">
-                <h3 className="text-xl font-bold">Originality</h3>
-              </div>
-              <div className="p-4 shadow-lg rounded-lg bg-gray-300 hover:bg-gray-900 hover:text-white transition-colors">
-                <h3 className="text-xl font-bold">Customer Satisfaction</h3>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
-        <ScrollReveal>
-          <section className="bg-gray-500 text-white text-center py-12 px-4">
-            <h2 className="text-2xl font-bold">Students Testimonials</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8 max-w-5xl mx-auto">
-              <div className="p-4 shadow-lg rounded-lg bg-gray-900 text-white hover:bg-white hover:text-black  transition-colors">
-                <p>
-                  "Your assignment has a clear and logical structure, making it
-                  easy to follow and understand. You've demonstrated thorough
-                  research and a deep understanding of the topic."
-                </p>
-                <h3 className="mt-4 font-bold">Emily Harris</h3>
-              </div>
-              <div className="p-4 shadow-lg rounded-lg bg-gray-900 text-white hover:bg-white hover:text-black  transition-colors">
-                <p>
-                  "The conclusion could benefit from a more explicit restatement
-                  of the research significance and practical implications.
-                  Overall, they are the best."
-                </p>
-                <h3 className="mt-4 font-bold">Charlotte Richardson</h3>
-              </div>
-              <div className="p-4 shadow-lg rounded-lg bg-gray-900 text-white hover:bg-white hover:text-black  transition-colors">
-                <p>
-                  "Your college assignment is well-organized and demonstrates a
-                  clear understanding of the subject. The introduction
-                  effectively outlines the main objectives."
-                </p>
-                <h3 className="mt-4 font-bold">James Stewart</h3>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
-        </div> */}
+      
       <Footer />
     </>
   );
