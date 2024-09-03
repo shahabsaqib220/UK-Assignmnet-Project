@@ -25,6 +25,11 @@ const Topbar = () => {
               href="https://wa.me/447851410518"
               className="flex items-center text-[#3b3b3b] hover:text-[#1a1a1a] transition-colors"
             >
+              <img
+                src={whatappIcon}
+                alt="WhatsApp Icon"
+                className="w-6 sm:w-6 md:w-10 lg:w-4 xl:w-12 mr-2"
+              />
             
 
 
