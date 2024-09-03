@@ -11,7 +11,9 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full border-b border-gray-200 shadow-sm">
+      <nav className="w-full border-b border-gray-200"
+  style={{ boxShadow: '8px 8px 20px rgba(0, 0, 0, 0.2), 4px 4px 15px rgba(0, 0, 0, 0.15)' }}
+>
         <div className="container mx-auto flex md:justify-between lg:justify-center md:px-8 items-center lg:px-0">
           <div className="block lg:hidden">
             <button

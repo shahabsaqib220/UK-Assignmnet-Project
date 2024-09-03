@@ -2,6 +2,9 @@ import React from "react";
 import logo from "../assets/images/logo.jpeg";
 import emailIcon from "../assets/images/email.png";
 import whatappIcon from "../assets/images/whatapp-icons.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+
 
 const Topbar = () => {
   return (
@@ -22,11 +25,13 @@ const Topbar = () => {
               href="https://wa.me/447851410518"
               className="flex items-center text-[#3b3b3b] hover:text-[#1a1a1a] transition-colors"
             >
-              <img
+            <img
                 src={whatappIcon}
                 alt="WhatsApp Icon"
                 className="w-6 sm:w-6 md:w-10 lg:w-4 xl:w-12 mr-2"
               />
+
+
               <span className="hidden md:inline font-semibold">
                 +44 7851 410518
               </span>
