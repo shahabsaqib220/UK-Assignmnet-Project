@@ -16,7 +16,7 @@ import { ref, uploadBytes, getDownloadURL } from "../config/firebase";
 import { useTable } from 'react-table';
 
 const bankDetails = [
-  { field: 'Bank Name', detail: 'Barclays Bank' },
+  { field: 'Bank Name', detail: 'Tide Bank' },
   { field: 'Account Name', detail: 'Tahir & J Consultants LTD' },
   { field: 'Sort Code', detail: '04-06-05' },
   { field: 'Account Number', detail: ' 24387572' },
