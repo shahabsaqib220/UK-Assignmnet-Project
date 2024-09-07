@@ -76,11 +76,17 @@ app.use('/api/payments',  PendingPaymentRouter);
 app.use(errorHandler);
 
 
-// Schedule the cron job to run every minute
+
+
 cron.schedule('0 9 * * 1', async () => {
-    await emailController.sendAdvertisementEmail();
-  });
-  
+  try {
+    await sendAdvertisementEmail();
+   
+  } catch (error) {
+    console.error('Failed to send advertisement email:', error);
+  }
+});
+
 
 
 // MongoDB connection

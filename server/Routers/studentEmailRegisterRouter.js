@@ -30,24 +30,27 @@ router.post('/registeremail', validateEmail, async (req, res) => {
     // Send email notification
     await sendEmail(
       email,
-      'Welcome to Our Assignmentask3 - Email Registration Successful',
+      'Welcome to Assignmentask3 - Email Registration Successful',
       `
-      Dear Student,
-
-      We are pleased to inform you that your email has been successfully registered at assignmentask3.
-
-      This registration enables you to receive important updates, notifications, and exclusive content tailored to your preferences.
-
-      If you have any questions or need further assistance, please do not hesitate to contact our support team.
-
-      Thank you for choosing us.
-
-      Best regards,
-      www.assignmentask3.com
-      assignmentask3@gmail.com
-      +44 7851 410518
+      <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+          <h2 style="color: #333; text-align: center; text-transform: uppercase;">Welcome to Assignmentask3</h2>
+          <p>Dear Student,</p>
+          <p>We are pleased to inform you that your email has been successfully registered with Assignmentask3.</p>
+          <p>This registration enables you to receive important updates, notifications, and exclusive content tailored to your preferences.</p>
+          <p>If you have any questions or need further assistance, please do not hesitate to contact our support team.</p>
+          <p>Thank you for choosing us.</p>
+          <p style="text-align: center; color: #333;">
+            Best regards,<br>
+            <a href="http://www.assignmentask3.com" style="color: #007BFF; text-decoration: none;">Assignmentask3</a><br>
+            <a href="mailto:assignmentask3@gmail.com" style="color: #007BFF; text-decoration: none;">assignmentask3@gmail.com</a><br>
+            +44 7851 410518
+          </p>
+        </div>
+      </div>
       `
     );
+    
 
     // Commit the transaction
     await session.commitTransaction();

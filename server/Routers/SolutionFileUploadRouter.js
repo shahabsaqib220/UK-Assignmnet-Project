@@ -67,22 +67,28 @@ router.post('/:orderId', upload.fields([{ name: 'solutionFile1' }, { name: 'solu
     // Send email notification
     const mailOptions = {
       from: process.env.GMAIL,
-      to: order.email, 
+      to: order.email,
       subject: `Your Order [Order ID: ${orderId}] Has Been Successfully Completed`,
-      text: `Dear Student,
-
-We are pleased to inform you that your order with the ID ${orderId} has been successfully completed. 
-
-Thank you for choosing our services. We hope to work with you again in the future.
-
-If you have any questions or need further assistance, please do not hesitate to reach out to our support team.
-
-Best regards,
-Assignmnet Ask 3
-assignmentask3@gmail.com
-+44 7851 410518
-www.assignmentask3.com`
+      html: `
+        <div style="background-color: #f4f4f4; padding: 20px; font-family: Arial, sans-serif;">
+          <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h2 style="text-align: center; color: #333; text-transform: uppercase;">Your Order [Order ID: ${orderId}] Has Been Successfully Completed</h2>
+            <p>Dear Student,</p>
+            <p>We are pleased to inform you that your order with the ID ${orderId} has been successfully completed.</p>
+            <p>Thank you for choosing our services. We hope to work with you again in the future.</p>
+            <p>If you have any questions or need further assistance, please do not hesitate to reach out to our support team.</p>
+            <p style="text-align: center; color: #333;">Best regards,</p>
+            <p style="text-align: center; color: #333;">
+              Assignment Ask 3<br>
+              <a href="mailto:assignmentask3@gmail.com" style="color: #007BFF;">assignmentask3@gmail.com</a><br>
+              <a href="tel:+447851410518" style="color: #007BFF;">+44 7851 410518</a><br>
+              <a href="http://www.assignmentask3.com" style="color: #007BFF;">www.assignmentask3.com</a>
+            </p>
+          </div>
+        </div>
+      `,
     };
+    
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {

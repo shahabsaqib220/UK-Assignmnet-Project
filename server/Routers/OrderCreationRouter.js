@@ -66,22 +66,26 @@ router.post('/create', async (req, res) => {
       from: process.env.GMAIL,
       to: email,
       subject: 'Order Pending Due to Payment Approval',
-      text: `Dear ${name},
-
-Thank you for your recent order with Assignment Ask 3. We have received your payment receipt and your order is currently pending while we verify your payment.
-
-You will receive an email with your Order ID once your payment has been approved.
-
-Thank you for your patience.
-
-Best regards,
-
-Assignmentask3
-assignmentask3@gmail.com
-www.assignmentask3.com
-+44 7851 410518
-`,
+      html: `
+        <div style="background-color: #759FBC; padding: 20px; font-family: Arial, sans-serif;">
+          <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h2 style="text-align: center; color: #333;">Order Pending Due to Payment Approval</h2>
+            <p>Dear ${name},</p>
+            <p>Thank you for your recent order with Assignment Ask 3. We have received your payment receipt, and your order is currently pending while we verify your payment.</p>
+            <p>You will receive an email with your Order ID once your payment has been approved.</p>
+            <p>Thank you for your patience.</p>
+            <p style="text-align: center; color: #333;">Best regards,</p>
+            <p style="text-align: center; color: #333;">
+              Assignmentask3<br>
+              <a href="mailto:assignmentask3@gmail.com" style="color: #007BFF;">assignmentask3@gmail.com</a><br>
+              <a href="http://www.assignmentask3.com" style="color: #007BFF;">www.assignmentask3.com</a><br>
+              +44 7851 410518
+            </p>
+          </div>
+        </div>
+      `,
     };
+    
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {

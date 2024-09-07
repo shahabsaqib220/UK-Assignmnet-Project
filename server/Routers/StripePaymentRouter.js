@@ -27,21 +27,25 @@ router.post('/approve-payment/:orderId', async (req, res) => {
         from: process.env.GMAIL,
         to: order.email,
         subject: 'Payment Approved - Your Order with Assignment Ask 3',
-        text: `Dear ${order.name},
-  
-  We are pleased to inform you that your payment has been approved. Below is your Order ID:
-  
-  Order ID: ${order.orderId}
-  
-  Your order is now being processed. We will keep you updated on the status of your order and notify you once it has been completed.
-  
-  Best regards,
-  
-  Assignmentask3
-  assignmentask3@gmail.com
-  www.assignmentask3.com
-  `,
+        html: `
+          <div style="background-color: #759FBC; padding: 20px; font-family: Arial, sans-serif;">
+            <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+              <h2 style="text-align: center; color: #333; text-transform: uppercase;">Payment Approved - Your Order with Assignment Ask 3</h2>
+              <p>Dear ${order.name},</p>
+              <p>We are pleased to inform you that your payment has been approved. Below is your Order ID:</p>
+              <p style="font-weight: bold; color: #333;">Order ID: ${order.orderId}</p>
+              <p>Your order is now being processed. We will keep you updated on the status of your order and notify you once it has been completed.</p>
+              <p style="text-align: center; color: #333;">Best regards,</p>
+              <p style="text-align: center; color: #333;">
+                Assignmentask3<br>
+                <a href="mailto:assignmentask3@gmail.com" style="color: #007BFF;">assignmentask3@gmail.com</a><br>
+                <a href="http://www.assignmentask3.com" style="color: #007BFF;">www.assignmentask3.com</a>
+              </p>
+            </div>
+          </div>
+        `,
       };
+      
   
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {

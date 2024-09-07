@@ -10,8 +10,12 @@ const emailSetupSchema = new mongoose.Schema({
     required: true,
   },
   filePath: {
-    type: String,
-    required:false, // URL of the file in Firebase, optional
+    type: String, // URL of the file in Firebase
+    required: false,
+  },
+  poster: {
+    type: String, // URL or path to the poster image
+    required: false,
   },
 });
 
