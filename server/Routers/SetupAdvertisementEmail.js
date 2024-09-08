@@ -140,18 +140,26 @@ exports.sendAdvertisementEmail = async () => {
       subject: emailSetup.subject || 'Advertisement Email!',
       html: `
         <div style="width: 600px; margin: 0 auto; padding: 30px; background-color: #759FBC; box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3), 0px 16px 32px rgba(0, 0, 0, 0.2); border-radius: 10px; text-align: center; font-family: Arial, sans-serif;">
+          
           <!-- Subject as the header -->
           <div style="padding: 15px 0; font-size: 26px; font-weight: bold; color: #333; border-bottom: 2px solid #ddd;">
             ${emailSetup.subject}
           </div>
-
+          
+          <!-- Logo below the subject, centered -->
+          <div style="padding: 20px 0;">
+            <img src="https://firebasestorage.googleapis.com/v0/b/assignment-ask3.appspot.com/o/logo.jpeg?alt=media&token=6664b601-898d-4354-a17d-1cb70dd3d887" 
+                 alt="Assignmentask3 Logo" 
+                 style="width: 100px; height: auto; margin: 0 auto; display: block;" />
+          </div>
+    
           <!-- Poster image, only if provided -->
           <div style="padding: 30px 0;">
             ${emailSetup.poster ? `<img src="${emailSetup.poster}" alt="Poster" style="max-width: 100%; height: auto; margin: 0 auto; border-radius: 10px;">` : ''}
           </div>
-
+    
           <!-- Text content -->
-          <div style="padding: 20px 0; font-size: 18px; color: #333 ; line-height: 1.6;">
+          <div style="padding: 20px 0; font-size: 18px; color: #333; line-height: 1.6;">
             ${emailSetup.text}
           </div>
         </div>
@@ -165,6 +173,7 @@ exports.sendAdvertisementEmail = async () => {
         }
       ] : [] // Only include attachments if the file exists
     };
+    
 
     // Send the email
     transporter.sendMail(mailOptions, (error, info) => {
