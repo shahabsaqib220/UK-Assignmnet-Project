@@ -20,11 +20,16 @@ const EmailSetupForm = () => {
   const [updatedFileName, setUpdatedFileName] = useState("");
 
   const allowedFileTypes = [
-    "image/*", // Any image
-    ".pdf", // PDF files
-    ".doc", ".docx", // Word files
-    ".ppt", ".pptx" // PowerPoint files
+    "application/pdf",               // PDF
+    "application/msword",             // Word (.doc)
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // Word (.docx)
+    "application/vnd.ms-powerpoint",  // PowerPoint (.ppt)
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation", // PowerPoint (.pptx)
+    "image/jpeg",                     // JPEG images
+    "image/png",                      // PNG images
+    "image/gif"                       // GIF images
   ];
+  
 
 
   const fetchEmailSetup = async () => {
@@ -61,7 +66,8 @@ const EmailSetupForm = () => {
       });
       return false;
     }
-
+  
+    // Check if file type is allowed for regular files
     if (type === "file" && !allowedFileTypes.includes(file.type)) {
       Swal.fire({
         title: "Invalid File",
@@ -71,9 +77,10 @@ const EmailSetupForm = () => {
       });
       return false;
     }
-
+  
     return true;
   };
+  
 
   const handleFileChange = (e, type) => {
     const selectedFile = e.target.files[0];
@@ -117,7 +124,7 @@ const EmailSetupForm = () => {
     }
   
     setIsLoading(true);
-  
+    
     try {
       const response = await fetch(
         "https://uk-assignmnet-project.vercel.app/api/setupemail/update-email-setup", // replace with actual API URL

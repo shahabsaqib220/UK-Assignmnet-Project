@@ -44,6 +44,7 @@ const uploadFileToFirebase = (file, folder) => {
 // Route to update email setup
 exports.updateEmailSetup = async (req, res) => {
   try {
+   
     const { text, subject } = req.body;
     const file = req.files?.file?.[0]; // Access file from req.files
     const poster = req.files?.poster?.[0]; // Access poster from req.files
