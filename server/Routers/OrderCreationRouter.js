@@ -7,38 +7,41 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// Nodemailer Transporter with optimized settings
 const transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // true for 465, false for other ports
   auth: {
     user: process.env.GMAIL,
-    pass: process.env.GMAIL_APP_PASSWORD  // Make sure to use an app-specific password
-  }
+    pass: process.env.GMAIL_APP_PASSWORD, // App-specific password
+  },
 });
 
-// Function to extract relative path from full URL
+// Utility to extract file paths
 const extractRelativePath = (url) => {
   try {
-    const parts = url.split('/o/')[1].split('?')[0]; // Extracts the part after '/o/' and before any query parameters
-    return decodeURIComponent(parts); // Decode any percent-encoded characters
+    const parts = url.split('/o/')[1].split('?')[0]; // Extracts path after '/o/'
+    return decodeURIComponent(parts); // Decode percent-encoded characters
   } catch (error) {
     console.error('Invalid URL:', error);
     return null;
   }
 };
 
+// Route to create a new order
 router.post('/create', async (req, res) => {
-  const { 
-    name, email, phone, academicLevel, deadline, wordCount, paperType, 
-    problemFileUrl, requirementFileUrl, descriptionFileUrl, 
-    paymentReceiptUrl 
+  const {
+    name, email, phone, academicLevel, deadline, wordCount, paperType,
+    problemFileUrl, requirementFileUrl, descriptionFileUrl, paymentReceiptUrl,
   } = req.body;
 
+  // Validate required fields
   if (!name || !email || !phone || !academicLevel || !deadline || !wordCount || !paperType || !paymentReceiptUrl) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
-   // Generate a unique orderId
-   const orderId = generateRandomOrderId();
+  const orderId = generateRandomOrderId(); // Generate unique order ID
 
   const newOrder = new Order({
     name,
@@ -46,47 +49,45 @@ router.post('/create', async (req, res) => {
     phone,
     academicLevel,
     orderId,
-    
     deadline,
     wordCount,
     paperType,
     problemFilePath: problemFileUrl ? extractRelativePath(problemFileUrl) : null,
     requirementFilePath: requirementFileUrl ? extractRelativePath(requirementFileUrl) : null,
     descriptionFilePath: descriptionFileUrl ? extractRelativePath(descriptionFileUrl) : null,
-    paymentReceiptUrl: paymentReceiptUrl ? extractRelativePath(paymentReceiptUrl) : null 
-    
+    paymentReceiptUrl: paymentReceiptUrl ? extractRelativePath(paymentReceiptUrl) : null,
   });
-  
 
   try {
     const savedOrder = await newOrder.save();
 
-    // Send an email notifying the student that their order is pending due to payment approval
+    // Prepare email content
     const mailOptions = {
-      from: process.env.GMAIL,
+      from: `"Assignment Ask 3" <${process.env.GMAIL}>`, // Verified sender
       to: email,
-      subject: 'Order Pending Due to Payment Approval',
+      subject: 'Order Pending - Payment Approval Required',
       html: `
-        <div style="background-color: #759FBC; padding: 20px; font-family: Arial, sans-serif;">
-          <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <h2 style="text-align: center; color: #333;">Order Pending Due to Payment Approval</h2>
+        <div style="background-color: #f8f9fa; padding: 20px; font-family: Arial, sans-serif;">
+          <div style="max-width: 600px; margin: auto; background: #fff; border: 1px solid #ddd; border-radius: 5px; padding: 20px;">
+            <h2 style="color: #343a40; text-align: center;">Order Pending - Payment Approval Required</h2>
             <p>Dear ${name},</p>
-            <p>Thank you for your recent order with Assignment Ask 3. We have received your payment receipt, and your order is currently pending while we verify your payment.</p>
-            <p>You will receive an email with your Order ID once your payment has been approved.</p>
-            <p>Thank you for your patience.</p>
-            <p style="text-align: center; color: #333;">Best regards,</p>
-            <p style="text-align: center; color: #333;">
-              Assignmentask3<br>
-              <a href="mailto:assignmentask3@gmail.com" style="color: #007BFF;">assignmentask3@gmail.com</a><br>
-              <a href="http://www.assignmentask3.com" style="color: #007BFF;">www.assignmentask3.com</a><br>
+            <p>Thank you for placing an order with Assignment Ask 3. Your payment receipt has been received, and your order is currently pending while we verify your payment.</p>
+            <p>You will be notified once your payment is approved. In the meantime, feel free to contact us if you have any questions.</p>
+            <p style="text-align: center;">
+              <strong>Contact Us</strong><br>
+              <a href="mailto:assignmentask3@gmail.com" style="color: #007bff;">assignmentask3@gmail.com</a><br>
+              <a href="http://www.assignmentask3.com" style="color: #007bff;">www.assignmentask3.com</a><br>
               +44 7851 410518
+            </p>
+            <p style="text-align: center; font-size: 14px; color: #6c757d;">
+              This is an automated email. Please do not reply directly to this message.
             </p>
           </div>
         </div>
       `,
     };
-    
 
+    // Send email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);
@@ -97,7 +98,7 @@ router.post('/create', async (req, res) => {
 
     res.status(201).json({
       message: 'Order created successfully and is pending payment approval',
-      order: savedOrder
+      order: savedOrder,
     });
   } catch (error) {
     console.error('Error saving order:', error);

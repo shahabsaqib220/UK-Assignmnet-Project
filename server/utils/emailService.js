@@ -4,29 +4,40 @@ const dotenv = require('dotenv');
 // Dotenv configuration
 dotenv.config();
 
-// Configure the transporter
+// Configure the transporter with SMTP
 const transporter = nodemailer.createTransport({
-  service: 'Gmail', // e.g., Gmail, Outlook, etc.
+  host: 'smtp.gmail.com', // SMTP server
+  port: 465, // Use 465 for SSL or 587 for STARTTLS
+  secure: true, // Set to true for port 465, false for port 587
   auth: {
-    user: process.env.GMAIL, // Replace with your email
-    pass: process.env.GMAIL_APP_PASSWORD,  // Replace with your email password or an app-specific password
+    user: process.env.GMAIL, // Gmail address
+    pass: process.env.GMAIL_APP_PASSWORD, // App-specific password
   },
 });
 
-// Function to send an email
+/**
+ * Function to send an email
+ * @param {string} to - Recipient's email address
+ * @param {string} subject - Email subject
+ * @param {string} htmlContent - HTML content for the email
+ */
 const sendEmail = async (to, subject, htmlContent) => {
   const mailOptions = {
-    from: process.env.GMAIL, // Replace with your email
-    to,
-    subject,
-    html: htmlContent, // Changed from `text` to `html` to support HTML content
+    from: `"AssignmentAsk3" <${process.env.GMAIL}>`, // Sender's name and email
+    to, // Recipient's email
+    subject, // Email subject
+    html: htmlContent, // HTML content of the email
+    headers: {
+      'X-Priority': '1', // Mark email as high priority
+      'X-Mailer': 'Nodemailer', // Specify the mailer
+    },
   };
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`Email sent to ${to}`);
+    console.log(`Email successfully sent to ${to}`);
   } catch (error) {
-    console.error(`Error sending email to ${to}:`, error);
+    console.error(`Error sending email to ${to}:`, error.message);
   }
 };
 

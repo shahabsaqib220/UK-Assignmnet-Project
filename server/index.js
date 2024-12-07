@@ -24,6 +24,8 @@ const ForgetPasswordRouter = require("./Routers/ForgetPasswordRouter")
 const StudentMessageRouter = require("./Routers/StudentMessagesRouter")
 const PaymentReciptsStatusRouter = require("./Routers/PaymentReciptsStatus")
 const PendingPaymentRouter = require("./Routers/PendingPaymentRouter")
+const RegisteredStudentBulkEmailRouter = require("./Routers/RegisteredStudentBulkEmail")
+const ExcelFileDownloadRouter = require("./Routers/EmailExcelFile")
 
 // Load environment variables from .env file
 dotenv.config();
@@ -73,6 +75,7 @@ app.use('/api/admin',  AdminLoginRouter);
 app.use('/api/admin',   ForgetPasswordRouter);
 app.use('/api/contact',   StudentMessageRouter);
 app.use('/api/payments',  PendingPaymentRouter);
+app.use('/api/email/excel',  ExcelFileDownloadRouter);
 app.use(errorHandler);
 
 

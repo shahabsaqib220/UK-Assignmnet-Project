@@ -44,29 +44,23 @@ const uploadFileToFirebase = (file, folder) => {
 // Route to update email setup
 exports.updateEmailSetup = async (req, res) => {
   try {
-   
     const { text, subject } = req.body;
-    const file = req.files?.file?.[0]; // Access file from req.files
-    const poster = req.files?.poster?.[0]; // Access poster from req.files
+    const file = req.files?.file?.[0];
+    const poster = req.files?.poster?.[0];
 
-    // Find the current email setup or create a new one if it doesn't exist
     let emailSetup = await EmailSetup.findOne();
     if (!emailSetup) {
       emailSetup = new EmailSetup();
     }
 
-    // Update text and subject fields
     emailSetup.text = text;
     emailSetup.subject = subject;
 
-    // Upload the file and poster to Firebase, if provided
     const fileUploadPromise = file ? uploadFileToFirebase(file, 'email') : Promise.resolve(null);
     const posterUploadPromise = poster ? uploadFileToFirebase(poster, 'poster') : Promise.resolve(null);
 
-    // Wait for uploads to complete
     const [fileResult, posterResult] = await Promise.all([fileUploadPromise, posterUploadPromise]);
 
-    // If a file or poster was uploaded, update the respective fields
     if (fileResult) {
       emailSetup.filePath = fileResult.fileURL;
       emailSetup.fileName = fileResult.filename;
@@ -76,9 +70,7 @@ exports.updateEmailSetup = async (req, res) => {
       emailSetup.posterName = posterResult.filename;
     }
 
-    // Save the updated email setup in MongoDB
     await emailSetup.save();
-
     return res.json(emailSetup);
   } catch (err) {
     console.error('Error updating email setup:', err);
@@ -114,77 +106,45 @@ exports.getEmailSetup = async (req, res) => {
 // Schedule the function to send advertisement emails
 exports.sendAdvertisementEmail = async () => {
   try {
-    // Fetch the current email setup
     const emailSetup = await EmailSetup.findOne();
-    if (!emailSetup) {
-      
-      return;
-    }
+    if (!emailSetup) return res.status(404).send('No email setup found');
 
-    // Fetch all emails from the "orders" and "registerstudentemails" collections
     const orderEmails = await orders.find().select('email -_id');
     const registeredEmails = await registerstudentemails.find().select('email -_id');
 
-    // Combine and deduplicate emails
-    const allEmails = [...orderEmails.map(doc => doc.email), ...registeredEmails.map(doc => doc.email)];
+    const allEmails = [...orderEmails.map((doc) => doc.email), ...registeredEmails.map((doc) => doc.email)];
     const uniqueEmails = [...new Set(allEmails)];
 
-    if (uniqueEmails.length === 0) {
-     
-      return;
-    }
+    if (uniqueEmails.length === 0) return res.status(204).send('No emails to send to');
 
-    // Setup email options
     const mailOptions = {
-      from: process.env.GMAIL,
+      from: `"AssignmentAsk3" <${process.env.GMAIL}>`,
       to: uniqueEmails,
       subject: emailSetup.subject || 'Advertisement Email!',
       html: `
-        <div style="width: 600px; margin: 0 auto; padding: 30px; background-color: #759FBC; box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3), 0px 16px 32px rgba(0, 0, 0, 0.2); border-radius: 10px; text-align: center; font-family: Arial, sans-serif;">
-          
-          <!-- Subject as the header -->
-          <div style="padding: 15px 0; font-size: 26px; font-weight: bold; color: #333; border-bottom: 2px solid #ddd;">
-            ${emailSetup.subject}
-          </div>
-          
-          <!-- Logo below the subject, centered -->
-          <div style="padding: 20px 0;">
-            <img src="https://firebasestorage.googleapis.com/v0/b/assignment-ask3.appspot.com/o/logo.jpeg?alt=media&token=6664b601-898d-4354-a17d-1cb70dd3d887" 
-                 alt="Assignmentask3 Logo" 
-                 style="width: 100px; height: auto; margin: 0 auto; display: block;" />
-          </div>
-    
-          <!-- Poster image, only if provided -->
-          <div style="padding: 30px 0;">
-            ${emailSetup.poster ? `<img src="${emailSetup.poster}" alt="Poster" style="max-width: 100%; height: auto; margin: 0 auto; border-radius: 10px;">` : ''}
-          </div>
-    
-          <!-- Text content -->
-          <div style="padding: 20px 0; font-size: 18px; color: #333; line-height: 1.6;">
-            ${emailSetup.text}
-          </div>
-        </div>
-      `,
-      attachments: emailSetup.filePath ? [
-        {
-          filename: emailSetup.fileName,
-          path: emailSetup.filePath,
-          cid: 'attachment@file',
-          contentType: 'application/octet-stream'
-        }
-      ] : [] // Only include attachments if the file exists
+        <div style="background-color: #f5f5f5; padding: 20px;">
+          <h2>${emailSetup.subject}</h2>
+          ${emailSetup.poster ? `<img src="${emailSetup.poster}" alt="Poster" style="max-width: 100%;">` : ''}
+          <p>${emailSetup.text}</p>
+        </div>`,
+      attachments: emailSetup.filePath ? [{
+        filename: emailSetup.fileName,
+        path: emailSetup.filePath,
+      }] : [],
     };
-    
 
-    // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending email:', error);
-      } else {
-        console.log('OK Response', info.response);
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.error('Error sending email:', err);
+        return res.status(500).send('Failed to send email');
       }
+      console.log('Email sent:', info.response);
+      res.send('Email sent successfully');
     });
   } catch (err) {
     console.error('Failed to send advertisement email:', err);
+    return res.status(500).send('Error sending advertisement email');
   }
 };
+
+

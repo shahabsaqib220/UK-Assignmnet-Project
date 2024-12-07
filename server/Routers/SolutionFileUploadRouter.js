@@ -1,6 +1,5 @@
-// routes/uploadSolution.js
 const express = require('express');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
 const { bucket } = require('../Configurations/firebase');
@@ -12,17 +11,21 @@ dotenv.config();
 
 router.use(cors());
 
-
 // Set up multer for file uploads
 const upload = multer({ storage: multer.memoryStorage() });
 
-// Set up nodemailer transporter
+// Set up nodemailer transporter with secure SMTP connection
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Use the email service you prefer
+  host: 'smtp.gmail.com',
+  port: 587, // Use port 587 for secure connection with TLS
+  secure: false, // Use TLS
   auth: {
     user: process.env.GMAIL,
-    pass: process.env.GMAIL_APP_PASSWORD // Make sure to use an app-specific password
-  }
+    pass: process.env.GMAIL_APP_PASSWORD, // Ensure this is an app-specific password
+  },
+  tls: {
+    rejectUnauthorized: false, // Allow self-signed certificates in dev
+  },
 });
 
 router.post('/:orderId', upload.fields([{ name: 'solutionFile1' }, { name: 'solutionFile2' }]), async (req, res) => {
@@ -35,10 +38,7 @@ router.post('/:orderId', upload.fields([{ name: 'solutionFile1' }, { name: 'solu
       return res.status(404).json({ error: 'Order not found' });
     }
 
- 
-    const updateData = {
-      status: 'completed' // Set the status to 'completed'
-    };
+    const updateData = { status: 'completed' };
 
     if (files.solutionFile1) {
       const file1 = files.solutionFile1[0];
@@ -66,17 +66,17 @@ router.post('/:orderId', upload.fields([{ name: 'solutionFile1' }, { name: 'solu
 
     // Send email notification
     const mailOptions = {
-      from: process.env.GMAIL,
+      from: `"Assignment Ask 3" <${process.env.GMAIL}>`, // Ensure recognizable sender
       to: order.email,
-      subject: `Your Order [Order ID: ${orderId}] Has Been Successfully Completed`,
+      subject: `Order Completed: [Order ID: ${orderId}]`,
       html: `
         <div style="background-color: #f4f4f4; padding: 20px; font-family: Arial, sans-serif;">
           <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <h2 style="text-align: center; color: #333; text-transform: uppercase;">Your Order [Order ID: ${orderId}] Has Been Successfully Completed</h2>
-            <p>Dear Student,</p>
-            <p>We are pleased to inform you that your order with the ID ${orderId} has been successfully completed.</p>
-            <p>Thank you for choosing our services. We hope to work with you again in the future.</p>
-            <p>If you have any questions or need further assistance, please do not hesitate to reach out to our support team.</p>
+            <h2 style="text-align: center; color: #333;">Your Order [Order ID: ${orderId}] Has Been Successfully Completed</h2>
+            <p>Dear ${order.name},</p>
+            <p>We are pleased to inform you that your order with ID <strong>${orderId}</strong> has been successfully completed.</p>
+            <p>If you have any questions or need further assistance, please feel free to contact us.</p>
+            <p>Thank you for choosing Assignment Ask 3.</p>
             <p style="text-align: center; color: #333;">Best regards,</p>
             <p style="text-align: center; color: #333;">
               Assignment Ask 3<br>
@@ -88,20 +88,18 @@ router.post('/:orderId', upload.fields([{ name: 'solutionFile1' }, { name: 'solu
         </div>
       `,
     };
-    
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.error("Error sending email:", error);
-      } else {
-        console.log('Email sent: ' + info.response);
+        console.error('Error sending email:', error.message);
+        return res.status(500).json({ error: 'Error sending email', details: error.message });
       }
+      console.log('Email sent:', info.response);
+      res.status(200).json({ message: 'Files uploaded and email sent successfully' });
     });
-
-    res.status(200).json({ message: 'Files uploaded and paths updated successfully' });
   } catch (error) {
-    console.error("Error uploading files:", error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Error uploading files:', error.message);
+    res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 });
 

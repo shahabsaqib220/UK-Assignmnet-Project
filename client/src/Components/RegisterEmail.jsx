@@ -4,7 +4,8 @@ import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import Topbar from "./TopBar";
 import AdministratorNavbar from "./AdministratorNavbar";
-
+import RegisteredBulkEmails from "./RegisteredBulkEmails";
+import { FaDownload } from "react-icons/fa";
 const EmailRegisterForm = () => {
   const [email, setEmail] = useState("");
   const [registeredEmails, setRegisteredEmails] = useState([]);
@@ -32,8 +33,9 @@ const EmailRegisterForm = () => {
   }, [searchTerm, registeredEmails]);
 
   const fetchRegisteredEmails = async () => {
+    // Production level API: https://uk-assignmnet-project.vercel.app/api/emails/get-all-emails
     try {
-      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/emails/get-all-emails");
+      const response = await fetch("http://localhost:5000/api/emails/get-all-emails");
       const data = await response.json();
       setRegisteredEmails(data);
       setFilteredEmails(data);
@@ -47,7 +49,7 @@ const EmailRegisterForm = () => {
     e.preventDefault();
     setIsRegistering(true);
     try {
-      const response = await fetch("https://uk-assignmnet-project.vercel.app/api/emails/registeremail", {
+      const response = await fetch("http://localhost:5000/api/emails/registeremail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -144,12 +146,40 @@ const EmailRegisterForm = () => {
     }
   };
 
+  const handleDownload = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/email/excel/downloadEmails'); // Update URL if needed
+      if (!response.ok) {
+        throw new Error('Failed to download Excel file');
+      }
+
+      // Create a blob from the response
+      const blob = await response.blob();
+
+      // Create a link element to trigger the download
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'registered_emails.xlsx';
+      link.click();
+
+      // Clean up the URL
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      alert('Failed to download the Excel file');
+    }
+  };
+
+  
+
   return (
     <>
       <Topbar />
       <AdministratorNavbar />
+    
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-300">
-  <div className="flex flex-col-reverse md:flex-row items-center w-full max-w-4xl bg-white shadow-2xl rounded-lg overflow-hidden transform transition-transform hover:scale-105">
+  <div className="flex flex-col-reverse mt-8 md:flex-row items-center w-full max-w-4xl bg-white shadow-2xl rounded-lg overflow-hidden transform transition-transform hover:scale-105">
     <div className="w-full md:w-1/2">
       <img
         src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=2517&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.jpg"
@@ -162,7 +192,7 @@ const EmailRegisterForm = () => {
         <form
           className="flex flex-col items-center space-y-6"
           onSubmit={handleRegister}
-        >
+          >
           <h2 className="text-3xl font-extrabold text-gray-800 font-moseoSans uppercase tracking-wide">
             Register Student Emails
           </h2>
@@ -178,7 +208,7 @@ const EmailRegisterForm = () => {
             className="px-8 py-3 text-lg font-semibold text-white bg-blue-600 rounded-md shadow-md hover:bg-blue-700 transition-colors duration-300 ease-in-out uppercase tracking-wide"
             type="submit"
             disabled={isRegistering || isRemovingAll}
-          >
+            >
             {isRegistering ? (
               <div className="animate-pulse">Registering...</div>
             ) : (
@@ -189,10 +219,22 @@ const EmailRegisterForm = () => {
       </animated.div>
     </div>
   </div>
-  <div className="mt-8 w-full max-w-4xl bg-white shadow-2xl rounded-lg p-6">
-    <h2 className="text-xl font-moseoSans uppercase font-bold text-gray-800 mb-4">
+
+   
+  <div className="mt-10 w-full max-w-4xl bg-white shadow-2xl rounded-lg p-6">
+  <RegisteredBulkEmails/>
+    <h2 className="text-xl mt-6 font-moseoSans uppercase font-bold text-gray-800 mb-4">
       Registered Emails
     </h2>
+    <div className="mt-6 mb-4">
+      <button
+        onClick={handleDownload}
+        className="bg-blue-600 text-white flex items-center font-moseoSans uppercase tracking-wide px-4 py-2 rounded hover:bg-blue-700"
+      >
+        <FaDownload className="mr-2" /> {/* Add icon */}
+        Registered Emails
+      </button>
+    </div>
     <input
       type="text"
       placeholder="Search Emails"
@@ -200,15 +242,15 @@ const EmailRegisterForm = () => {
       onChange={(e) => setSearchTerm(e.target.value)}
       className="w-full px-4 py-2 mb-4 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-sm transition-all duration-300 ease-in-out"
       disabled={isRegistering || isRemovingAll}
-    />
+      />
     <div className="flex flex-col space-y-2">
       {filteredEmails.length === 0 ? (
         <p className="text-gray-500">No email found.</p>
       ) : (
         filteredEmails.map((email) => (
           <div
-            key={email._id}
-            className="flex justify-between items-center bg-blue-50 p-2 rounded-md shadow-sm hover:bg-blue-100 transition-colors duration-300 ease-in-out"
+          key={email._id}
+          className="flex justify-between items-center bg-blue-50 p-2 rounded-md shadow-sm hover:bg-blue-100 transition-colors duration-300 ease-in-out"
           >
             <span className="text-gray-700">{email.email}</span>
             <button
@@ -224,7 +266,9 @@ const EmailRegisterForm = () => {
                 "Remove"
               )}
             </button>
+    
           </div>
+          
         ))
       )}
     </div>
