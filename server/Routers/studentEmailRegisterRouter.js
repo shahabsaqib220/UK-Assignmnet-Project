@@ -3,6 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Email = require('../Models/RegisterStudentEmailModel');
 const { sendEmail } = require('../utils/emailService');
+const connectDB = require('../db');
+
+connectDB();
 
 // Single email registration route
 router.post('/registeremail', async (req, res) => {

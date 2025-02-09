@@ -11,7 +11,7 @@ const handleOrderNowClick = (e) => {
     behavior: "smooth", // Smooth scroll to the top
   });
   // If you need to redirect to the homepage, you can use:
-  window.location.href = "https://uk-assignmnet-project-frontend.vercel.app/";
+  window.location.href = "https://www.assignmentask3.com/";
 };
 const handleWhatappClick = () => {
   // Construct the WhatsApp URL with the phone number
@@ -25,7 +25,7 @@ const handleWhatappClick = () => {
 
 const handleMailClick = () => {
   // Construct the mailto URL with the email address
-  const email = "assignmenttask3@gmail.com";
+  const email = "assignmentask3@gmail.com";
   const url = `mailto:${email}`;
 
   // Redirect to the mailto URL

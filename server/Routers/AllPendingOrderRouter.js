@@ -4,8 +4,10 @@ const router = express.Router();
 const cors = require("cors");
 
 const Order = require("../Models/orderCreationModel");
+const connectDB = require("../db");
 
 router.use(cors());
+connectDB();
 
 // Route to get all pending orders with isPaymentApproved set to true
 router.get("/", async (req, res) => {

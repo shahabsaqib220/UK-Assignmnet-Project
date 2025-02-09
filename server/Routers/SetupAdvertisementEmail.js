@@ -5,10 +5,13 @@ const registerstudentemails = require("../Models/RegisterStudentEmailModel");
 const { transporter } = require('../utils/emailService');
 const { bucket } = require('../Configurations/firebase');
 const path = require('path');
+const connectDB = require('../db');
 
 // Multer setup for handling file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+connectDB();
 
 // Function to upload a file to Firebase
 const uploadFileToFirebase = (file, folder) => {

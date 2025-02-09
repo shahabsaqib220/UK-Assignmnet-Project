@@ -4,11 +4,13 @@ const router = express.Router();
 const Order = require('../Models/orderCreationModel'); // Adjust the path to your Order model
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
+const connectDB = require('../db');
 
 dotenv.config();
 
 // Enable CORS
 router.use(cors());
+connectDB();
 
 // Create a secure transporter for Nodemailer
 const transporter = nodemailer.createTransport({

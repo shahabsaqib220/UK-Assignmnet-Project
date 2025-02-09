@@ -5,6 +5,9 @@ const router = express.Router();
 // Middleware to handle errors
 const errorHandler = require('../middlewares/errorHandler');
 
+const connectDB = require('../db');
+connectDB();
+
 // POST: Create a new message
 router.post('/submit', async (req, res, next) => {
   try {

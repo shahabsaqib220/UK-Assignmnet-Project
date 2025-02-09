@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
+const connectDB = require('../db');
+connectDB();
+
 // @route   POST /api/auth/register
 // @desc    Register admin
 // @access  Public

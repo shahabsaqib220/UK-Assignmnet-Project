@@ -4,8 +4,10 @@ const Order = require('../Models/orderCreationModel');
 const generateRandomOrderId = require('../utils/generateOrderId');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
+const connectDB = require('../db');
 
 dotenv.config();
+connectDB();
 
 // Nodemailer Transporter with optimized settings
 const transporter = nodemailer.createTransport({

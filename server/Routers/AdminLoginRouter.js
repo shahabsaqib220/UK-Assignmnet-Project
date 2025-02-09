@@ -8,6 +8,9 @@ const dotenv = require("dotenv")
 
 const router = express.Router();
 
+const connectDB = require('../db');
+connectDB();
+
 
 
 // Dotenv configuration

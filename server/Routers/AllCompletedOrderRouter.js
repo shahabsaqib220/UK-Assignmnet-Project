@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../Models/orderCreationModel'); // Assuming you have an Order model
+const connectDB = require('../db');
+
+connectDB();
 
 // GET route to fetch all completed orders
 router.get('/complete', async (req, res) => {

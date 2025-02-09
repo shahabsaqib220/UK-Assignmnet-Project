@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const XLSX = require('xlsx');
 const Email = require('../Models/RegisterStudentEmailModel'); // Assuming your Email model is here
+const connectDB = require('../db');
+connectDB();
 
 router.get('/downloadEmails', async (req, res) => {
   try {

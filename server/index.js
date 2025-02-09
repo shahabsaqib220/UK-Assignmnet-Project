@@ -25,7 +25,8 @@ const StudentMessageRouter = require("./Routers/StudentMessagesRouter")
 const PaymentReciptsStatusRouter = require("./Routers/PaymentReciptsStatus")
 const PendingPaymentRouter = require("./Routers/PendingPaymentRouter")
 const RegisteredStudentBulkEmailRouter = require("./Routers/RegisteredStudentBulkEmail")
-const ExcelFileDownloadRouter = require("./Routers/EmailExcelFile")
+const ExcelFileDownloadRouter = require("./Routers/EmailExcelFile");
+const connectDB = require('./db');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -93,14 +94,9 @@ cron.schedule('0 9 * * 1', async () => {
 
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected...'))
-.catch((err) => console.error('MongoDB connection error:', err));
+connectDB();
 
-// Basic route
+
 
 
 // Define the port from environment variables or default to 3000

@@ -4,8 +4,10 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const Order = require('../Models/orderCreationModel');
 const generateRandomOrderId = require('../utils/generateOrderId');
+const connectDB = require('../db');
 
 dotenv.config();
+connectDB();
 
 // Create reusable transporter object using SMTP configuration
 const transporter = nodemailer.createTransport({

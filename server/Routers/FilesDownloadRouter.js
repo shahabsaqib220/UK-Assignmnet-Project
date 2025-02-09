@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { bucket } = require('../Configurations/firebase');
 const Order = require('../Models/orderCreationModel');
+const connectDB = require('../db');
+
+
+connectDB();
 
 router.get('/download/:orderId/:fileType', async (req, res) => {
     const { orderId, fileType } = req.params;

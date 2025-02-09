@@ -5,9 +5,12 @@ const nodemailer = require('nodemailer');
 const { bucket } = require('../Configurations/firebase');
 const Order = require('../Models/orderCreationModel'); // Import your Order model
 const cors = require('cors');
+const connectDB = require('../db');
 
 const router = express.Router();
 dotenv.config();
+
+connectDB();
 
 router.use(cors());
 

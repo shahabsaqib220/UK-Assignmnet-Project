@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../Models/orderCreationModel'); // Assuming you have an Order model
+const connectDB = require('../db');
+
+
+
+connectDB();
 
 // POST route to search for orders by email and orderId
 router.post('/search', async (req, res) => {
