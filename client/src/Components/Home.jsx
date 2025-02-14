@@ -13,18 +13,24 @@ import CardSlider from "./Card";
 import Ribbon from "./Ribbon";
 import TawkChat from "./TawkToChat";
 
+import AdSenseComponent from "./AdSense";
+
 const Home = () => {
   return (
     <>
       <Ribbon />
       <TawkChat />
+      <AdSenseComponent/>
       <TopBar />
       <Navbar />
       <Info />
+      <AdSenseComponent/>
 
       <Services />
+      <AdSenseComponent/>
       <Card />
       <Events />
+      <AdSenseComponent/>
 
       <Footer />
     </>
